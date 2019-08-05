@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.his.dao.TuifeiDao">
+
+    <!-- 病例号读取信息-->
+    <select id="getUnPayByCaseNo" parameterType="string" resultType="pay">
+        select pd.id,pd.case_no,pd.pay_money,pd.pay_num,pd.pay_state,di.dg_name,di.dg_spec,di.dg_price,di.dg_uit,r.rname,r.settle_type
+        from t_his_pay_info pd, t_his_drug_info di, t_his_register r
+        where pd.dg_id=di.id and pd.case_no=r.case_no and pd.pay_state=1 and pd.case_no = #{caseNo}
+    </select>
+
+    <!-- 全退-->
+    <update id="unAllPayByCaseNo" parameterType="string">
+        update t_his_pay_info set pay_num=0,pay_money=0,remark='全退' where case_no = #{caseNo}
+    </update>
+
+    <!-- 退费-->
+    <update id="unPayByCaseNo">
+        update t_his_pay_info set pay_num=pay_num-#{num},pay_money=#{money} where id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.his.dao.zhenduanDao">
+
+    <!-- 获取挂号信息列表-->
+    <select id="getRegisterByDoctor" resultType="register">
+        select r.id,case_no,rname,sex,age,birthday,settle_type,mcard_no,
+            medical_type,id_card,address,vist_date,reg_level,dept_no,dr_id,reg_pay,reg_src,diag_state,reg_state<if test="diagState == 1">,c_info</if>
+        from t_his_register r <if test="diagState == 1">,t_his_case_info c</if> where dr_id = #{doctorId} and diag_state = #{diagState}
+        and reg_state = 0 <if test="diagState == 1">and r.case_no = c.c_no</if>
+    </select>
+
+    <!-- 诊断-->
+    <insert id="addCaseInfo" parameterType="case">
+        insert into t_his_case_info(c_no,c_info) values (#{cNo},#{cInfo})
+    </insert>
+    
+    <!-- 更新诊断状态-->
+    <update id="updateDlagStateByCaseNo" parameterType="string">
+        update t_his_register set diag_state = 1 where case_no = #{caseNo};
+    </update>
+
+</mapper>

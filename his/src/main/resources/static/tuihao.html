@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>退号</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/tuihao.css">
+    <style type="text/css">
+        #guahaoxinxi {
+            width: 1440px;
+            height: 130px;
+            margin-top: 10px;
+            padding: 10px 20px;
+        }
+
+        #guahaoxinxi div {
+            height: 100%;
+        }
+
+        #guahaoxinxi input {
+            border: none;
+            border-bottom: 1px solid #A8BCCF;
+        }
+
+        #guahaoxinxi input {
+            height: 22.5px;
+        }
+
+        #guahaoxinxi span {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #tableflex {
+            display: flex;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            justify-content: space-around;
+        }
+
+        #tableflex div {
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-content: space-between;
+        }
+
+        #tableflex span {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #tableflex input {
+            border: none;
+            border-bottom: 1px solid #A8BCCF;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="part1">
+        <ul>
+            <li><a href="#">门诊挂号管理</a></li>
+            <li>|<a href="#">门诊收费管理</a></li>
+            <li>|<a href="#">住院登记管理</a></li>
+            <li>|<a href="#">住院费用管理</a></li>
+            <li>|<a href="#">医院字典设定</a></li>
+            <li>|<a href="#">个人设置</a></li>
+        </ul>
+    </div>
+    <div class="part2">
+        &ensp;门诊挂号发票&ensp;<input type="text" name="" invoice id="invoice" placeholder="输入发票号"/>&ensp;<span
+            id="updatenumber">更新发票号</span>
+    </div>
+    <div class="part3">
+				<span id="invoiceinfotitle">
+					&ensp;&ensp;&ensp;&ensp;挂号信息
+				</span>
+        <span id="invoiceoption">
+					<ul>
+						<li><a href=""><i class="makeappointment glyphicon glyphicon-align-justify"></i>退费</a></li>
+						<li><a class="back_register_btn" href="javascript:void(0)"><i class="makeappointment glyphicon glyphicon glyphicon-file"></i>退号</a></li>
+						<li><a href=""><i class="makeappointment glyphicon glyphicon glyphicon-refresh"></i>清屏</a></li>
+					</ul>
+				</span>
+    </div>
+    <div class="clear"></div>
+    <div class="part4">
+        &ensp;&ensp;&ensp;
+        <select class="typenumbeoption">
+            <option value="1">身份证号</option>
+            <option value="2">医保卡号</option>
+            <option value="3">健康卡号</option>
+        </select>
+        <input type="typenumber" name="typenumber" id="typenumber" placeholder="请输入相应卡号"/>
+        <span class="cardlist">
+					<ul>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>医保卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>农合卡读卡</li>
+						<li id="sfzdk"><i class="makeappointment glyphicon glyphicon-credit-card"></i>身份证读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>健康卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>西康卡读卡</li>
+					</ul>
+				</span>
+    </div>
+    <div class="row clearfix" id="guahaoxinxi">
+        <div class="col-md-7 column">
+            <div class="col-md-4 column">
+                <span>病历号<input type="text" name="case_no" readonly/></span><br/>
+                <span>结算类别<input type="text" name="settle_type" readonly/></span><br/>
+                <span>发票号<input type="text" name="get_reg_ino" readonly/></span><br/>
+            </div>
+            <div class="col-md-4 column">
+                <span>姓名<input type="text" name="pname" readonly/></span><br/>
+                <span>医疗证号<input type="text" name="mcard_no" readonly/></span><br/>
+            </div>
+            <div class="col-md-4 column">
+                <span>性别<input type="text" name="sex" readonly/></span><br/>
+                <span>医疗类别<input type="text" name="medical_type" readonly/></span><br/>
+            </div>
+
+        </div>
+        <div class="col-md-5 column">
+            <div class="col-md-6 column">
+                <span>年龄<input type="text" name="age" readonly/></span><br/>
+                <span>身份证号<input type="text" name="pid" readonly/></span><br/>
+            </div>
+            <div class="col-md-6 column">
+                <span>出生日期<input type="text" name="birthday" readonly/></span><br/>
+                <span>家庭住址<input type="text" name="address" readonly/></span><br/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="part6">
+    <div class="row">
+        <div class="col-lg-6 list-info">
+
+            <table cellspacing="0" cellpadding="0" class="tablebox">
+                <caption style="color:#000;margin: 0;padding: 0">
+                    <div class="title">
+                        &ensp;&ensp;&ensp;&ensp;挂号信息
+                    </div>
+                </caption>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>病历号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>出生日期</th>
+                    <th>身份证号</th>
+                    <th>发票号</th>
+                    <th>结算类别</th>
+                    <th>挂号级别</th>
+                    <th>挂号日期</th>
+                    <th>刊正日期</th>
+                    <th>是否已诊</th>
+                    <th>状态</th>
+                    <th>实收费用</th>
+                    <th>看诊科室</th>
+                </tr>
+                </thead>
+                <tbody id="registerList"></tbody>
+            </table>
+        </div>
+        <div class="col-lg-6 list-info">
+            <div id="tablerighttop" class="title" style="padding: 0;margin: 0;">
+                &ensp;&ensp;&ensp;&ensp;挂号发票信息
+            </div>
+            <div id="tableflex">
+                <div>
+                    <span>票据种类<input type="text" name="inv_type" readonly/></span><br/>
+                    <span>总金额<input type="text" name="reg_pay" readonly/></span><br/>
+                    <span>自付金额<input type="text" name="zero" readonly/></span><br/>
+                    <span>实付金额<input type="text" name="reg_pay" readonly/></span>
+                </div>
+                <div>
+                    <span>首张发票号<input type="text" name="get_reg_ino" readonly/></span><br/>
+                    <span>自费金额<input type="text" name="reg_pay" readonly/></span> <br/>
+                    <span>报销金额<input type="text" name="zero" readonly/></span><br/>
+                    <span>差额<input type="text" name="zero" readonly/></span>
+                </div>
+            </div>
+            <div class="row title">
+                &ensp;&ensp;&ensp;&ensp;门诊收费明细
+            </div>
+            <div class="row shoufei">
+                <table class="table table-striped" border="1px" bordercolor="#DCDCDC" id="table2">
+                    <thead>
+                    <tr class="tr1">
+                        <td class="bianxiao"><input type="checkbox" name="change_all" style="widtd: 26px;"/></td>
+                        <td>项目名称</td>
+                        <td>药品标识</td>
+                        <td>项目状态</td>
+                        <td>单价</td>
+                        <td>总金额</td>
+                        <td>自费金额</td>
+                        <td>自付金额</td>
+                        <td>报销金额</td>
+                        <td>实付金额</td>
+                        <td>差额</td>
+                    </tr>
+                    </thead>
+                    <tbody class="inv_tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="part7">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">
+            <<</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">>></a></li>
+    </ul>
+</div>
+</div>
+
+<script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    //获取所有的科室
+    var keshi = [];
+    $.post("getDep", {}, function (data) {
+        keshi = data;
+    });
+    //身份证读卡
+    $("#sfzdk").click(function () {
+        var idCard = $("#typenumber").val();
+        if (idCard != "") {
+            $.post("getRegisterByIdCard", {idCard: idCard}, function (item) {
+                $("#registerList").html("");
+                var tr = "<tr>";
+                tr += "<td><input id='show_reg' type='checkbox' style='width: 20px;' value='" + item.id + "' /></td>";
+                tr += "<td>" + item.caseNo + "</td>";
+                tr += "<td>" + item.rname + "</td>";
+                if (item.sex == 0) {
+                    tr += "<td>男</td>";
+                } else if (item.sex == 1) {
+                    tr += "<td>女</td>";
+                } else {
+                    tr += "<td>无效</td>";
+                }
+                tr += "<td>" + item.birthday + "</td>";
+                tr += "<td>" + item.idCard + "</td>";
+                tr += "<td>" + item.caseNo + "</td>";
+                if (item.settleType == 0) {
+                    tr += "<td>自费</td>";
+                } else {
+                    tr += "<td>无效</td>";
+                }
+                if (item.regLevel == 0) {
+                    tr += "<td>普通</td>";
+                } else if (item.regLevel == 1) {
+                    tr += "<td>专家</td>";
+                } else {
+                    tr += "<td>无效</td>";
+                }
+                tr += "<td>" + item.vistDate + "</td>";
+                tr += "<td>" + item.vistDate + "</td>";
+                if (item.diagState == 0) {
+                    tr += "<td>未诊断</td>";
+                } else if (item.diagState == 1) {
+                    tr += "<td>已诊断</td>";
+                } else {
+                    tr += "<td>无效</td>";
+                }
+                if (item.regState == 0) {
+                    tr += "<td id='leftRegStatus'>正常</td>";
+                } else if (item.regState == 1) {
+                    tr += "<td id='leftRegStatus'>已退号</td>";
+                } else {
+                    tr += "<td id='leftRegStatus'>其他</td>";
+                }
+                tr += "<td>" + item.regPay + "</td>";
+                tr += "<td>" + keshi[item.deptNo - 1].dname + "</td>";
+                tr += '<td style="display:none">' + item.mcardNo + '</td>';
+                tr += '<td style="display:none">' + item.medicalType + '</td>';
+                tr += '<td style="display:none">' + item.address + '</td>';
+                tr += '<td style="display:none">' + item.id + '</td>';
+                tr += "</tr>";
+                $("#registerList").append(tr);
+            });
+        } else {
+            alert("身份证号不能为空");
+        }
+    });
+
+    //根据日期计算年龄
+    function getAgeByBirthday(data) {
+        var date = new Date();
+        var birthday = new Date(data);
+        var time = parseInt((date - birthday) / (1000 * 60 * 60 * 24));
+        var sui = Math.floor(time / 365);
+        return sui;
+    };
+    //是否诊断
+    var isa;
+    //点击显示详情
+    $("#registerList").on("click", "#show_reg", function () {
+        var tb = $(this).parent().parent().children("td");
+        var case_no = tb.eq(1).text();
+        var pname = tb.eq(2).text();
+        var sex = tb.eq(3).text();
+        var birthday = tb.eq(4).text();
+        var settle_type = tb.eq(7).text();
+        var pid = tb.eq(5).text();
+        var mcardNo = tb.eq(15).text();
+        var medicalType = tb.eq(16).text();
+        var address = tb.eq(17).text();
+        var id = tb.eq(18).text();
+        // 是否诊断
+        isa = tb.eq(11).text();
+
+
+        $("input[name='case_no']").val(case_no);
+        $("input[name='pname']").val(pname);
+        $("input[name='sex']").val(sex);
+        $("input[name='age']").val(getAgeByBirthday(birthday));
+        $("input[name='birthday']").val(birthday.trim());
+        $("input[name='settle_type']").val(settle_type);
+        $("input[name='pid']").val(pid);
+        $("input[name='get_reg_ino']").val(case_no);
+        $("input[name='mcard_no']").val(mcardNo);
+        $("input[name='medical_type']").val(mcardNo == 0 ? "市保" : "公务员");
+        $("input[name='address']").val(address);
+
+        // 写入挂号发票信息
+        var reg_pay = tb.eq(13).text();
+        $("input[name='inv_type']").val("门诊挂号发票号");
+        $("input[name='reg_pay']").val(reg_pay);
+        $("input[name='zero']").val(0);
+
+        // 写入门诊收费明细
+
+        var reg_status = tb.eq(12).text();
+        var invHtml = '<tr>';
+        invHtml += '<td><input id="select_unregister" type="checkbox" value="' + id + '" style="width:20px" /></td>';
+        invHtml += '<td>挂号费</td>';
+        invHtml += '<td>否</td>';
+        invHtml += '<td id="regStatus">' + reg_status + '</td>';
+        invHtml += '<td>' + reg_pay + '</td>';
+        invHtml += '<td>' + reg_pay + '</td>';
+        invHtml += '<td>' + reg_pay + '</td>';
+        invHtml += '<td>0</td>';
+        invHtml += '<td>0</td>';
+        invHtml += '<td>' + reg_pay + '</td>';
+        invHtml += '<td>0</td>';
+        invHtml += '</tr>';
+        $(".inv_tbody").html("").append(invHtml);
+    });
+
+    // 退号请求
+    $(".back_register_btn").click(function () {
+        // 判断是否勾选
+        var isSelect = $("#select_unregister").is(":checked");
+        if (!isSelect) {
+            alert("请先选择");
+        } else if ("已诊断" == isa) {
+            alert("已诊断不能退号");
+        } else {
+            $.ajax({
+                url: "unRegisterById",
+                type: "post",
+                data: {registerId: $("#select_unregister").val()},
+                error: function () {
+                    alert("退号异常");
+                },
+                success: function (data) {
+                    if (data) {
+                        alert("退号成功");
+                        $("#regStatus").text('已退号');
+                        $("#leftRegStatus").text('已退号');
+                    } else {
+                        alert("退号失败");
+                    }
+
+                }
+            });
+        }
+    });
+
+    $(".pagination li").click(function () {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+    });
+</script>
+</body>
+</html>

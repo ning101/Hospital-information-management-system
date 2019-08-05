@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.his.dao.guahaoDao">
+
+    <!-- 查询所有的科室-->
+    <select id="findDep" resultType="dep">
+        select id,dname from t_his_department;
+    </select>
+
+    <!-- 查询科室下的所有医生-->
+    <select id="findDoctor" parameterType="int" resultType="doctor">
+        select id,code,username as userName,pwd,dep from t_his_doctor_info where dep = #{keshi}
+    </select>
+
+    <!-- 增加挂号信息-->
+    <insert id="guahao" parameterType="register" useGeneratedKeys="true" keyProperty="id">
+        insert into t_his_register(case_no,rname,sex,age,birthday,settle_type,mcard_no,
+            medical_type,id_card,address,vist_date,reg_level,dept_no,dr_id,reg_pay,reg_src,diag_state,reg_state)
+        values(#{caseNo},#{rname},#{sex},#{age},#{birthday},#{settleType},#{mcardNo},#{medicalType},#{idCard},
+            #{address},#{vistDate},#{regLevel},#{deptNo},#{drId},#{regPay},#{regSrc},0,0)
+    </insert>
+
+    <!-- 获取挂号信息列表-->
+    <select id="getRegister" resultType="register">
+        select id,case_no,rname,sex,age,birthday,settle_type,mcard_no,
+            medical_type,id_card,address,vist_date,reg_level,dept_no,dr_id,reg_pay,reg_src,diag_state,reg_state
+        from t_his_register
+    </select>
+
+</mapper>

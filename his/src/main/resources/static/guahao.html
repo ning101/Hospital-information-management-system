@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>挂号</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/guahao.css">
+	</head>
+	<body>
+		<div id="main">
+			<div class="part1">
+				<ul>
+					<li><a href="#">门诊挂号管理</a></li>
+					<li>|<a href="#">门诊收费管理</a></li>
+					<li>|<a href="#">住院登记管理</a></li>
+					<li>|<a href="#">住院费用管理</a></li>
+					<li>|<a href="#">医院字典设定</a></li>
+					<li>|<a href="#">个人设置</a></li>
+				</ul>
+			</div>
+			<div class="part2">
+				&ensp;门诊挂号发票&ensp;<input type="text" name=""invoice id="invoice" placeholder="输入发票号" />&ensp;<span id="updatenumber">更新发票号</span>
+			</div>
+			<div class="part3">
+					<span id="invoiceinfotitle">
+						&ensp;&ensp;&ensp;&ensp;挂号信息
+					</span>
+					<span id="invoiceoption">
+						<ul>
+							<li><a href=""><i class="makeappointment 	glyphicon glyphicon-circle-arrow-up"></i>预约选择</a></li>
+							<li><a href="javascript:void(0)" id="guahao"><i class="makeappointment 	glyphicon glyphicon-file"></i>挂号</a></li>
+							<li><a href=""><i class="makeappointment 	glyphicon glyphicon-tasks"></i>补受挂号费</a></li>
+							<li><a href=""><i class="makeappointment 	glyphicon glyphicon-print"></i>补打</a></li>
+							<li><a href=""><i class="makeappointment 	glyphicon glyphicon-print"></i>重打</a></li>
+							<li><a href=""><i class="makeappointment 	glyphicon glyphicon-refresh"></i>清屏</a></li>
+						</ul>
+					</span>
+			</div>
+			<div class="clear"></div>
+			<div class="part4">
+					&ensp;&ensp;&ensp;
+					<select class="typenumbeoption">
+						<option value ="1">身份证号</option>
+						<option value ="2">医保卡号</option>
+						<option value ="3">健康卡号</option>
+					</select>
+					<input type="typenumber" name="typenumber" id="typenumber" placeholder="请输入相应卡号" />
+				<span class="cardlist">
+					<ul>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>医保卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>农合卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>身份证读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>健康卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>西康卡读卡</li>
+					</ul>
+				</span>
+			</div>
+			<div class="part5">
+				<ul>
+					<li>病历号&ensp;&ensp;&ensp;<input type="text" class="has-error inputsingle" id="blh"></li>
+					<li>姓名&ensp;&ensp;&ensp;&ensp;&ensp;<input type="text" class="inputsingle" id="xm"></li>
+					<li style="height: 22px;">
+						性别&ensp;&ensp;&ensp;&ensp;&ensp;<select class="sex" id="xb">
+							<option value="0">男</option>
+							<option value ="1">女</option>
+						</select>
+					</li>
+					<li>
+						年龄&ensp;&ensp;&ensp;&ensp;&ensp;<input type="text" class="age" id="nl">
+						<select class="agetype" id="nllb">
+							<option value ="1">岁</option>
+							<option value ="2">月</option>
+						</select>
+					</li>
+					<li>出生日期&ensp;<input type="date" class="inputsingle" id="csrq"></li>
+					<li>结算类别&ensp;
+						<select id="jslb" class="sex">
+							<option value="0">自费</option>
+						</select>
+					</li>
+					<li>医疗证号&ensp;<input type="text"  class="inputsingle" id="ylzh"></li>
+					<li>医疗类别&ensp;<select id="yllb" class="sex">
+							<option value="0">市保</option>
+							<option value="1">公务员</option>
+						</select>
+					</li>
+					<li>身份证号&ensp;<input type="text" class="inputsingle" id="sfzh"></li>
+					<li>家庭住址&ensp;<input type="text" class="inputsingle" id="jtzz"></li>
+					<li>看诊日期&ensp;<input type="date" class="inputsingle" id="kzrq" style="height: 18px;"></li>
+					<li>
+						号别&ensp;&ensp;&ensp;&ensp;&ensp;<select class="sex" id="hb">
+							<option value="0">普通</option>
+							<option value="1">专家</option>
+						</select>
+					</li>
+					<li>
+						挂号科室&ensp;<select class="sex" id="ghks">
+						</select>
+					</li>
+					<li>
+						看诊医生&ensp;<select class="sex" id="kzys">
+						</select>
+					</li>
+					<li>应收金额&ensp;<input type="text" disabled class="inputsingle" value="2" id="ysje"></li>
+					<li>
+						挂号来源&ensp;<select class="sex" id="ghly">
+							<option value="1">窗口挂号</option>
+							<option value="2">网络挂号</option>
+							<option value="3">其他</option>
+						</select>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="part6">
+				<table cellspacing="0" cellpadding="0" class="tablebox" id="registerList">
+					<tr class="theader">
+						<th colspan="15">
+							<span id="infolist">
+								挂号信息列表
+							</span> 
+							<span id="refresh">
+								刷新
+							</span>
+						</th>
+					</tr>
+					<tr>
+						<th></th>
+						<th>病历号</th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>出生日期</th>
+						<th>身份证号</th>
+						<th>发票号</th>
+						<th>结算类别</th>
+						<th>挂号级别</th>
+						<th>挂号日期</th>
+						<th>刊正日期</th>
+						<th>是否已诊</th>
+						<th>状态</th>
+						<th>实收费用</th>
+						<th>看诊科室</th>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="part7">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link" href="#"><<</a></li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">>></a></li>
+				  </ul>
+			</div>
+		</div>
+		
+		<script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				//挂号
+				$("#guahao").click(function () {
+					var guahaoInfo = {
+						caseNo:$("#blh").val(),
+						rname:$("#xm").val(),
+						sex:$("#xb").val(),
+						age:$("#nl").val(),
+						birthday:$("#csrq").val(),
+						settleType:$("#jslb").val(),
+						mcardNo:$("#ylzh").val(),
+						medicalType:$("#yllb").val(),
+						idCard:$("#sfzh").val(),
+						address:$("#jtzz").val(),
+						vistDate:$("#kzrq").val(),
+						regLevel:$("#hb").val(),
+						deptNo:$("#ghks").val(),
+						drId:$("#kzys").val(),
+						regPay:$("#ysje").val(),
+						regSrc:$("#ghly").val()
+					};
+					var tag = true;
+					$.each(guahaoInfo,function (index,item) {
+						if (item == "" || item == null){
+							alert("不能为空");
+							tag = false;
+							return false;
+						}
+					});
+					if (tag){
+						$.post("addRegister",guahaoInfo,function (data) {
+							if (data){
+								alert("挂号成功");
+								window.location.reload();
+							} else {
+								alert("挂号失败");
+							}
+						});
+					}
+				});
+				//获取所有的科室
+				var keshi = [];
+				$.post("getDep",{},function (data) {
+					keshi = data;
+					$("#ghks").append("<option></option>");
+					$.each(data,function (index,item) {
+						$("#ghks").append("<option value='" + item.id + "'>"+ item.dname +"</option>");
+					});
+				});
+				//生成病历号
+				function getTenStr(no){
+					if (! no){
+						return "0000000001";
+					}
+					var str = no + '';
+					if (str.length < 10){
+						var n = 10 - str.length;
+						for (var i=0; i<n; i++){
+							str = '0' + str;
+						}
+					}
+					return str;
+				}
+				//获取挂号信息列表
+				$.ajax({url:"getRegister",type:'post',datatype:'json',data:{},success:function (data) {
+						$.each(data,function (index,item) {
+							var tr = "<tr>";
+							tr += "<td>"+(index+1)+"</td>";
+							tr += "<td>"+item.caseNo+"</td>";
+							tr += "<td>"+item.rname+"</td>";
+							if (item.sex == 0){
+								tr += "<td>男</td>";
+							} else if(item.sex == 1){
+								tr += "<td>女</td>";
+							}else{
+								tr += "<td>无效</td>";
+							}
+							tr += "<td>"+item.birthday+"</td>";
+							tr += "<td>"+item.idCard+"</td>";
+							tr += "<td>"+item.caseNo+"</td>";
+							if (item.settleType == 0){
+								tr += "<td>自费</td>";
+							} else {
+								tr += "<td>无效</td>";
+							}
+							if (item.regLevel == 0){
+								tr += "<td>普通</td>";
+							} else if (item.regLevel == 1) {
+								tr += "<td>专家</td>";
+							}else {
+								tr += "<td>无效</td>";
+							}
+							tr += "<td>"+item.vistDate+"</td>";
+							tr += "<td>"+item.vistDate+"</td>";
+							if (item.diagState == 0){
+								tr += "<td>未诊断</td>";
+							}else if (item.diagState == 1){
+								tr += "<td>已诊断</td>";
+							} else {
+								tr += "<td>无效</td>";
+							}
+							if (item.regState == 0){
+								tr += "<td>正常</td>";
+							}else if (item.regState == 1) {
+								tr += "<td>已退号</td>";
+							}else {
+								tr += "<td>其他</td>";
+							}
+							tr += "<td>"+item.regPay+"</td>";
+							tr += "<td>"+keshi[item.deptNo-1].dname+"</td>";
+							tr += "</tr>";
+							$("#registerList").append(tr);
+						});
+						var no = $("#registerList tr:last td:eq(1)").text();
+						$("#blh").val(getTenStr(parseInt(no)+1));
+						$("#invoice").val(getTenStr(parseInt(no)+1));
+					}});
+				//选择科室查看医生
+				$("#ghks").change(function () {
+					var value = $(this).val();
+					$.post("getDoctor",{keshi:value},function (data) {
+						$("#kzys").html("");
+						$.each(data,function (index,item) {
+							$("#kzys").append("<option value='" + item.id + "'>"+ item.userName +"</option>");
+						});
+					});
+				});
+				//根据日期计算年龄
+				var date = new Date();
+				$("#csrq").change(function () {
+					var d = new Date($("#csrq").val());
+					var time = parseInt((date-d) / (1000 * 60 * 60 * 24));
+					var sui = Math.floor(time / 365);
+					if (sui > 0){
+						$("#nl").val(sui);
+						$("#nllb").val(1);
+					}else if (sui == 0) {
+						sui = Math.floor(time / 30);
+						$("#nl").val(sui);
+						$("#nllb").val(2);
+					}else{
+						alert("日期错误");
+					}
+				});
+				//选择号别修改金额
+				$("#hb").change(function () {
+					if ($(this).val() == 0){
+						$("#ysje").val(2);
+					} else if($(this).val() == 1) {
+						$("#ysje").val(10);
+					}else{
+						alert("非法操作");
+					}
+				});
+				$(".pagination li").click(function(){
+					$(this).siblings().removeClass("active");
+					$(this).addClass("active");
+				});
+			});
+		</script>
+	</body>
+</html>

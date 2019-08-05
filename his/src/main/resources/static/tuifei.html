@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>退费</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/tuihao.css">
+		<link rel="stylesheet" href="css/tuifei.css">
+		<style>
+			.part2{
+				padding: 10px 20px;
+				background: #BCE8F1;
+			}
+			.part2 div{
+				float: left;
+			}
+			.part2 div:nth-child(2){
+				margin-left: 60px;
+			}
+			.cardlist{
+				float: right;
+			}
+			.part5 ul{
+				width:1000px;
+			}
+			.part5 input{
+				width:160px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="part1">
+				<ul>
+					<li><a href="#">门诊挂号管理</a></li>
+					<li>|<a href="#">门诊收费管理</a></li>
+					<li>|<a href="#">住院登记管理</a></li>
+					<li>|<a href="#">住院费用管理</a></li>
+					<li>|<a href="#">医院字典设定</a></li>
+					<li>|<a href="#">个人设置</a></li>
+				</ul>
+			</div>
+			<div class="row part2">
+				<div>
+					<span style="color: #008000;">单据信息</span>
+					&ensp;门诊挂号发票&ensp;
+					<input type="text" name="" invoice id="invoice" placeholder="输入发票号" />&ensp;
+					<span id="updatenumber">更新发票号</span>
+				</div>
+				<div>
+					&ensp;&ensp;&ensp;
+					<select class="typenumbeoption">
+						<option value="1">身份证号</option>
+						<option value="2">医保卡号</option>
+						<option value="3">健康卡号</option>
+					</select>
+					<input type="typenumber" name="typenumber" id="typenumber" placeholder="请输入相应卡号" />
+				</div>
+				<div>
+					<span class="cardlist">
+						<ul>
+							<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>医保卡读卡</li>
+							<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>农合卡读卡</li>
+							<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>身份证读卡</li>
+							<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>健康卡读卡</li>
+							<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>西康卡读卡</li>
+						</ul>
+					</span>
+				</div>
+			</div>
+			<div class="part5">
+				<ul>
+					<li><span class="pre">单据号</span><input id="djh" type="text" value="" /></li>
+					<li><span class="pre">病历号</span><input id="blh" type="text" value="" /></li>
+					<li><span class="pre">患者姓名</span><span id="hzxm" class="next"></span></li>
+					<li><span class="pre">结算类别</span><span id="jslb" class="next"></span></li>
+					<li><span class="pre">总金额</span><span id="zje" class="next"></span></li>
+					<li><span class="pre">实付金额</span><span id="sfje" class="next"></span></li>
+					<li><span class="pre">现金支付</span><span id="xjzf" class="next"></span></li>
+					<li><span class="pre">账户支付</span><span id="zhzf" class="next"></span></li>
+					<li><span class="pre">报销金额</span><span id="bxje" class="next"></span></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="part6">
+				<div class="row list-head">
+					<span>收费明细</span>
+					<a href="#"><i class="glyphicon glyphicon-refresh">清屏</i></a>
+					<a href="#" id="bc"><i class="glyphicon glyphicon-print">保存</i></a>
+					<a href="#" id="qt"><i class="glyphicon glyphicon-th-list">全退</i></a>
+				</div>
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th></th>
+						<th>项目名称</th>
+						<th>规格</th>
+						<th>优惠前单价</th>
+						<th>优惠后单价</th>
+						<th>开立数量</th>
+						<th>单位</th>
+						<th>可退数量</th>
+						<th>退费数量</th>
+						<th>退费金额</th>
+						<th>优惠后退费金额</th>
+						<th>发药标识</th>
+					</tr>
+					</thead>
+					<tbody class="payList">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			//通过病历号读取信息
+			$("#blh").blur(function () {
+				var caseNo = $(this).val();
+				if (caseNo == "" || caseNo == null){
+					alert("病历号不能为空");
+					return false;
+				}
+				$.ajax({
+					url:"getUnPayByCaseNo",
+					type:"post",
+					data:{
+						caseNo:caseNo
+					},
+					dataType:"json",
+					error:function () {
+						alert("读取患者信息错误");
+					},
+					success:function (data) {
+						if (data != null){
+							$(".payList").html("");
+							$.each(data,function (i,item) {
+								var tr = "<tr>";
+								tr += "<td>"+(i+1)+"</td>";
+								tr += "<td>"+item.dgName+"</td>";
+								tr += "<td>"+item.dgSpec+"</td>";
+								tr += "<td>"+item.dgPrice+"</td>";
+								tr += "<td class='pdprice'>"+item.dgPrice+"</td>";
+								tr += "<td class='payNum'>"+item.payNum+"</td>";
+								tr += "<td>"+item.dgUit+"</td>";
+								tr += "<td class='backPayNum'>"+item.payNum+"</td>";
+								tr += "<td><input type='number' max='"+item.payNum+"' value='0' name='back_num' style='border:1px solid #66afe9' /></td>";
+								tr += "<td class='back_pay1'>0</td><td class='back_pay2'>0</td>";
+								tr += "<td>否</td>";
+								tr += "<td class='drugno' style='display: none;'>"+item.dgId+"</td>";
+								tr += "<td class='sfid' style='display: none'>"+item.id+"</td>";
+								tr += "</tr>";
+								$(".payList").append(tr);
+								$("#djh").val(item.caseNo);
+								$("#hzxm").text(item.rname);
+								if (item.settleType == 0){
+									$("#jslb").text("自费");
+								} else {
+									$("#jslb").text("其他");
+								}
+								$("#zje").text(item.payMoney);
+								$("#sfje").text(item.payMoney);
+								$("#xjzf").text(item.payMoney);
+								$("#zhzf").text(0);
+								$("#bxje").text(0);
+							});
+						}
+					}
+				});
+			});
+			//改变金额
+			$(".payList").on("change","tr input[name='back_num']",function () {
+				var price = $(this).parent().parent().find(".pdprice").text();
+				var num = $(this).val();
+				$(this).parent().parent().find(".back_pay1").text(num * price);
+				$(this).parent().parent().find(".back_pay2").text(num * price);
+			});
+			//全退
+			$("#qt").click(function () {
+				var caseNo = $("#blh").val();
+				$.ajax({
+					url:"unAllPayByCaseNo",
+					type:"post",
+					data:{
+						caseNo:caseNo
+					},
+					error:function () {
+						alert("全退错误");
+					},
+					success:function (data) {
+						if (data){
+							alert("全退成功");
+							$("#blh").blur();
+						} else {
+							alert("全退失败");
+						}
+					}
+				});
+			});
+			//退费
+			$("#bc").click(function () {
+				var arr = [];
+				$(".payList tr input[name='back_num']").each(function () {
+					var num = parseInt($(this).val());
+					if (num > 0){
+						var price = $(this).parent().parent().find(".pdprice").text();
+						var id = $(this).parent().parent().find(".sfid").text();
+						arr.push(id+"-"+num+"-"+price);
+					}
+				});
+				if (arr != null){
+					$.ajax({
+						url:"unPayById",
+						type:"post",
+						data:{
+							arr:arr
+						},
+						traditional:true,
+						error:function () {
+							alert("退费错误");
+						},
+						success:function (data) {
+							if (data){
+								alert("退费成功");
+								$("#blh").blur();
+							} else {
+								alert("退费失败");
+							}
+						}
+					});
+				}
+			});
+			$(".pagination li").click(function() {
+				$(this).siblings().removeClass("active");
+				$(this).addClass("active");
+			});
+		</script>
+	</body>
+</html>

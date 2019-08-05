@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.his.dao.ShoufeiDao">
+
+    <!-- 病例号读取信息-->
+    <select id="getRegisterByCaseNo" parameterType="java.util.List" resultType="register">
+        select id,case_no,rname,sex,age,birthday,settle_type,mcard_no,
+            medical_type,id_card,address,vist_date,reg_level,dept_no,dr_id,reg_pay,reg_src,diag_state,reg_state
+        from t_his_register where case_no = #{caseNo}
+    </select>
+
+    <!-- 根据医生id查询医生信息-->
+    <select id="getDoctorById" parameterType="int" resultType="string">
+        select username from t_his_doctor_info where id = #{drId}
+    </select>
+
+    <!-- 获取所有药品信息-->
+    <select id="getAllDrugInfo" resultType="drug">
+        select id,dg_name,dg_spec,dg_price,dg_inv,dg_uit from t_his_drug_info
+    </select>
+
+    <!-- 划价-->
+    <insert id="addPayInfo" parameterType="pay" useGeneratedKeys="true" keyProperty="id">
+        insert into t_his_pay_info(dg_id,case_no,pay_num,pay_money,pay_date,pay_state) values <foreach collection="list" item="item" index= "index" separator =",">
+        (#{item.dgId},#{item.caseNo},#{item.payNum},#{item.payMoney},#{item.payDate},0)</foreach>
+    </insert>
+
+    <!-- 收费-->
+    <select id="getPayInfo" parameterType="string" resultType="pay">
+        select id,dg_id,case_no,pay_num,pay_money,pay_date,pay_state,remark from t_his_pay_info where case_no = #{caseNo}
+    </select>
+
+    <!-- 缴费-->
+    <update id="upPayState" parameterType="int">
+        update t_his_pay_info set pay_state = 1 where id in <foreach collection="array" item="id" open="(" close=")" separator=",">#{id}</foreach>
+    </update>
+
+</mapper>

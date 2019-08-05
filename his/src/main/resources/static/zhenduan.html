@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>诊断</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/zhenduan.css">
+	</head>
+	<body>
+		<div class="">
+			<div class="row head">
+				<ul>
+					<li><a href="javascript:void(0);">通知公告</a></li>
+					<li><a href="javascript:void(0);">门诊医生站</a></li>
+					<li><a href="javascript:void(0);">住院医生站</a></li>
+					<li><a href="javascript:void(0);">住院登记管理</a></li>
+					<li><a href="javascript:void(0);">医院报告</a></li>
+					<li><a href="javascript:void(0);">全局模板管理</a></li>
+					<li><a href="javascript:void(0);">医院模板管理</a></li>
+					<li><a href="javascript:void(0);">病例病案管理</a></li>
+					<li><a href="javascript:void(0);">病例权限管理</a></li>
+					<li><a href="javascript:void(0);">医院字典设定</a></li>
+					<li><a href="javascript:void(0);" style="border-right: none;">个人设置</a></li>
+				</ul>
+			</div>
+			<div class="row content">
+				<div class="col-lg-3 left-bar">
+					<div class="row left-search">
+						<span>患者查询：</span>
+						<input type="text" name="search" />
+						<i class="glyphicon glyphicon-search"></i>
+					</div>
+					<div class="row">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#person" data-toggle="tab">
+									本人
+								</a>
+							</li>
+							<li>
+								<a href="#keshi" data-toggle="tab">
+									科室
+								</a>
+							</li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="person">
+								<div class="row table-title">
+									待诊患者信息
+									<i class="glyphicon glyphicon-refresh"></i>
+								</div>
+								<table class="table">
+									<tbody id="noDiag"></tbody>
+								</table>
+							</div>
+							<div class="tab-pane fade" id="keshi">
+								<div class="row table-title">
+									待诊患者信息
+									<i class="glyphicon glyphicon-refresh"></i>
+								</div>
+								<table class="table">
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="row succ">
+						<div class="row table-title">
+							已诊患者信息
+							<i class="glyphicon glyphicon-refresh"></i>
+						</div>
+						<table class="table">
+							<tbody id="yesDiag"></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-lg-9 right">
+					<div class="row right-info">
+						<span style="color: darkred">请选择患者！</span>
+					</div>
+					<div class="row right-head">
+						<ul>
+							<li><a href="javascript:void(0);">门诊首页</a></li>
+							<li><a data-toggle="modal" data-target="#myModal" href="javascript:void(0);">门诊病历</a></li>
+							<li><a href="javascript:void(0);">成药处方</a></li>
+							<li><a href="javascript:void(0);">外派处方</a></li>
+							<li><a href="javascript:void(0);">草药处方</a></li>
+							<li><a href="javascript:void(0);">检查申请</a></li>
+							<li><a href="javascript:void(0);">检验申请</a></li>
+							<li><a href="javascript:void(0);">处置单</a></li>
+							<li><a href="javascript:void(0);">中医账单</a></li>
+							<li><a href="javascript:void(0);" style="border-right: none;">患者账单</a></li>
+						</ul>
+					</div>
+					<div class="row right-table">
+						<table class="table table-bordered">
+							<tr>
+								<td rowspan="3">基本信息</td>
+								<td>姓名</td>
+								<td class="tname"></td>
+								<td>病例号</td>
+								<td class="tcase_no"></td>
+							</tr>
+							<tr>
+								<td>性别</td>
+								<td class="tsex"></td>
+								<td>出生日期</td>
+								<td class="tbirthday"></td>
+							</tr>
+							<tr>
+								<td>年龄</td>
+								<td class="tage"></td>
+								<td>身份证号</td>
+								<td class="tpid"></td>
+							</tr>
+							<tr>
+								<td>西医诊断</td>
+								<td colspan="4" class="tcase_text">
+
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">西医诊断</h4>
+					</div>
+					<div class="modal-body">
+						<textarea id="case_info" cols="76" class="form-control" rows="6"></textarea>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="submit_btn" type="button" class="btn btn-primary">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script>
+			function getUrlParam(name)
+			{
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+			}
+			var id = getUrlParam("id");
+			//待诊断
+			$.ajax({url:"getRegisterByDoctor",data:{doctorId:id,diagState:0},type:"post",dataType:"json",success:function (data) {
+					$.each(data,function (i,item) {
+						var tr = "<tr>";
+						tr += "<td>"+item.caseNo+"</td>";
+						tr += "<td>"+item.rname+"</td>";
+						tr += "<td>"+item.age+"</td>";
+						tr += '<td style="display: none">'+item.sex+'</td>';
+						tr += '<td style="display: none">'+item.settleType+'</td>';
+						tr += '<td style="display: none">'+item.birthday+'</td>';
+						tr += '<td style="display: none">'+item.idCard+'</td>';
+						tr += "</tr>";
+						$("#noDiag").append(tr);
+					})
+				}
+			});
+			//已诊断
+			$.ajax({url:"getRegisterByDoctor",data:{doctorId:id,diagState:1},type:"post",dataType:"json",success:function (data) {
+					$.each(data,function (i,item) {
+						var tr = "<tr>";
+						tr += "<td>"+item.caseNo+"</td>";
+						tr += "<td>"+item.rname+"</td>";
+						tr += "<td>"+item.age+"</td>";
+						tr += '<td style="display: none">'+item.sex+'</td>';
+						tr += '<td style="display: none">'+item.settleType+'</td>';
+						tr += '<td style="display: none">'+item.birthday+'</td>';
+						tr += '<td style="display: none">'+item.idCard+'</td>';
+						tr += '<td style="display: none">'+item.cInfo+'</td>';
+						tr += "</tr>";
+						$("#yesDiag").append(tr);
+					})
+				}
+			});
+			//选中未诊断患者
+			$("#noDiag").on("click","tr",function () {
+				var no = $(this).children().eq(0).text();
+				var name = $(this).children().eq(1).text();
+				var age = $(this).children().eq(2).text();
+				var sex = $(this).children().eq(3).text();
+				var type = $(this).children().eq(4).text();
+				var birthday = $(this).children().eq(5).text();
+				var idCard = $(this).children().eq(6).text();
+				var html = "就诊状态：<span style=\"color:red;\">未诊</span>\n" +
+						"\t\t\t\t\t\t就诊号：<span>"+no+"</span>\n" +
+						"\t\t\t\t\t\t姓名：<span>"+name+"</span>\n" +
+						"\t\t\t\t\t\t性别：<span>"+(sex==0?'男':'女')+"</span>\n" +
+						"\t\t\t\t\t\t年龄：<span>"+age+"岁</span>\n" +
+						"\t\t\t\t\t\t结算类别：<span>"+(type==0?'自费':'')+"</span>";
+				$(".right-info").html(html);
+
+				//将数据写入表格
+				$(".tname").text(name);
+				$(".tcase_no").text(no);
+				$(".tsex").text(sex==0?'男':'女');
+				$(".tbirthday").text(birthday);
+				$(".tage").text(age+"岁");
+				$(".tpid").text(idCard);
+				$(".tcase_text").text("");
+			});
+
+			//就诊操作
+			$("#submit_btn").click(function () {
+				var caseNo = $(".tcase_no").text();
+				var caseInfo = $("#case_info").val();
+				if (caseInfo == ""){
+					alert("诊断信息不能为空");
+				}else {
+					$.ajax({url:"addCaseInfo",data:{caseNo:caseNo,caseInfo:caseInfo},type:"post",dataType:"json",success:function (data) {
+							if (data){
+								alert("诊断成功");
+								$("#myModal").modal("hide");
+								window.location.reload();
+							} else {
+								alert("诊断失败");
+							}
+						},error:function () {
+							alert("诊断失败");
+						}
+					});
+				}
+			});
+
+			//选中已诊断患者
+			$("#yesDiag").on("click","tr",function () {
+				var no = $(this).children().eq(0).text();
+				var name = $(this).children().eq(1).text();
+				var age = $(this).children().eq(2).text();
+				var sex = $(this).children().eq(3).text();
+				var type = $(this).children().eq(4).text();
+				var birthday = $(this).children().eq(5).text();
+				var idCard = $(this).children().eq(6).text();
+				var caseInfo = $(this).children().eq(7).text();
+				var html = "就诊状态：<span style=\"color: chartreuse;\">已诊</span>\n" +
+						"\t\t\t\t\t\t就诊号：<span>"+no+"</span>\n" +
+						"\t\t\t\t\t\t姓名：<span>"+name+"</span>\n" +
+						"\t\t\t\t\t\t性别：<span>"+(sex==0?'男':'女')+"</span>\n" +
+						"\t\t\t\t\t\t年龄：<span>"+age+"岁</span>\n" +
+						"\t\t\t\t\t\t结算类别：<span>"+(type==0?'自费':'')+"</span>";
+				$(".right-info").html(html);
+
+				//将数据写入表格
+				$(".tname").text(name);
+				$(".tcase_no").text(no);
+				$(".tsex").text(sex==0?'男':'女');
+				$(".tbirthday").text(birthday);
+				$(".tage").text(age+"岁");
+				$(".tpid").text(idCard);
+				$(".tcase_text").text(caseInfo);
+			});
+		</script>
+	</body>
+</html>

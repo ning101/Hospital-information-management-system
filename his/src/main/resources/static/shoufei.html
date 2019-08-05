@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>收费</title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/guahao.css">
+		<link rel="stylesheet" href="css/shoufei.css">
+		<style>
+			.part5 ul li {
+				height: 22px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="part1">
+				<ul>
+					<li><a href="#">门诊挂号管理</a></li>
+					<li>|<a href="#">门诊收费管理</a></li>
+					<li>|<a href="#">住院登记管理</a></li>
+					<li>|<a href="#">住院费用管理</a></li>
+					<li>|<a href="#">医院字典设定</a></li>
+					<li>|<a href="#">个人设置</a></li>
+				</ul>
+			</div>
+			<div class="part3" style="margin-top: 20px;">
+					&ensp;门诊普通发票&ensp;
+					<input type="text" name="" invoice id="invoice" placeholder="输入发票号" />&ensp;
+					<span id="updatenumber">更新发票号</span>
+					<span id="invoiceoption">
+						<ul>
+							<li><a href="#"><i class="makeappointment 	glyphicon glyphicon-print"></i>发票重打</a></li>
+							<li><a href="#"><i class="makeappointment 	glyphicon glyphicon-print"></i>发票补丁</a></li>
+							<li><a href="#" class="pay_btn"><i class="makeappointment 	glyphicon glyphicon-ok-circle"></i>收费结算</a></li>
+							<li><a href="#" class="pricing_btn"><i class="makeappointment 	glyphicon glyphicon-plane"></i>划价</a></li>
+							<li><a href="#"><i class="makeappointment 	glyphicon glyphicon-plus"></i>填方</a></li>
+							<li><a href="#"><i class="makeappointment 	glyphicon glyphicon-minus"></i>删方</a></li>
+						</ul>
+					</span>
+			</div>
+			<div class="clear"></div>
+			<div class="part4">
+					&ensp;&ensp;&ensp;
+					<select class="typenumbeoption">
+						<option value ="1">身份证号</option>
+						<option value ="2">医保卡号</option>
+						<option value ="3">健康卡号</option>
+					</select>
+					<input type="typenumber" name="typenumber" id="typenumber" placeholder="请输入相应卡号" />
+				<span class="cardlist">
+					<ul>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>医保卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>农合卡读卡</li>
+						<li id="idCard_btn" style="cursor: pointer"><i class="makeappointment glyphicon glyphicon-credit-card"></i>身份证读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>健康卡读卡</li>
+						<li><i class="makeappointment glyphicon glyphicon-credit-card"></i>西康卡读卡</li>
+					</ul>
+				</span>
+			</div>
+			<div class="part5">
+				<ul style="width: 1200px;">
+					<li>病历号&ensp;&ensp;&ensp;<input id="blh" type="text" class="inputsingle"></li>
+					<li>姓名&ensp;&ensp;&ensp;&ensp;&ensp;<input id="xm" type="text" class="inputsingle"></li>
+					<li style="height: 22px;">
+						性别&ensp;&ensp;&ensp;&ensp;&ensp;<select id="xb" class="sex">
+							<option value="0">男</option>
+							<option value ="1">女</option>
+						</select>
+					</li>
+					<li>
+						年龄&ensp;&ensp;&ensp;&ensp;&ensp;<input id="nl" type="text" class="age">
+						<select class="agetype">
+							<option value ="1">岁</option>
+							<option value ="2">月</option>
+						</select>
+					</li>
+					<li>出生日期&ensp;<input id="csrq" type="date" class="inputsingle"></li>
+					<li>医保诊断&ensp;<input id="ybzd" type="text"  class="inputsingle"></li>
+					<li>身份证号&ensp;<input id="sfzh" type="text"  class="inputsingle"></li>
+					<li style="height: 22px">结算类别&ensp;
+						<select id="jslb" class="sex">
+							<option value="0">自费</option>
+						</select>
+					</li>
+					<li>医疗证号&ensp;<input id="ylzh" type="text" class="inputsingle"></li>
+					<li>
+						医疗类别&ensp;
+						<select id="yllb" class="sex">
+							<option value="0">市保</option>
+							<option value="1">公务员</option>
+						</select>
+					</li>
+					<li>
+						开单科室&ensp;
+						<select id="kdks" class="sex" disabled>
+						</select>
+					</li>
+					<li>开单医生&ensp;<input type="text" id="kdys" class="inputsingle" /></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="part6">
+				<div class="row list-head">
+					<span>收费项目列表</span>
+					<i class="glyphicon glyphicon-minus">删除</i>
+					<i style="cursor: pointer" class="add_drug_btn glyphicon glyphicon-plus">增加</i>
+				</div>
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th>
+							<input type="checkbox" />
+						</th>
+						<th>项目名称</th>
+						<th>规格</th>
+						<th>单价</th>
+						<th>数量</th>
+						<th>单位</th>
+						<th>付数</th>
+						<th>金额</th>
+						<th>执行科室</th>
+					</tr>
+					</thead>
+					<tbody id="tableList">
+
+					</tbody>
+				</table>
+				<div class="row list-foot">
+					<div class="col-lg-4 col-lg-offset-8" style="font-weight: bold">
+						总金额&emsp;￥：<span id="zje"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">药品表单</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>项目名称</th>
+									<th>规格</th>
+									<th>单价</th>
+									<th>数量</th>
+									<th>单位</th>
+								</tr>
+							</thead>
+							<tbody class="druginfo">
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="submit_btn" type="button" class="btn btn-primary">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal2 -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel2">划价表单</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th></th>
+								<th>划价号</th>
+								<th>病历号</th>
+								<th>总金额</th>
+								<th>状态</th>
+								<th>划价时间</th>
+							</tr>
+							</thead>
+							<tbody class="huajiaList">
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="submit_btn2" type="button" class="btn btn-primary">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			//划价
+			$(".pricing_btn").click(function () {
+				var drugArr = [];
+				var flag = true;
+				$("#tableList tr").each(function () {
+					if ($(this).find(".dgList").is(":checked")){
+						var id = $(this).find(".dgList").val();
+						var num = $(this).find(".fushu").val();
+						var price = $(this).children().eq(3).text();
+						drugArr.push(id+"-"+num+"-"+price);
+						flag = false;
+					}
+				});
+				if (flag)
+					return false;
+				var caseNo = $("#blh").val();
+				
+				$.ajax({
+					url:"addPayInfo",
+					type:"post",
+					data:{
+						caseNo:caseNo,
+						drugArr:drugArr
+					},
+					traditional:true,
+					error:function () {
+						alert("划价错误");
+					},
+					success:function (data) {
+						if (data){
+							alert("划价成功");
+						} else {
+							alert("划价失败");
+						}
+					}
+				});
+
+			});
+			//收费结算
+			$(".pay_btn").click(function () {
+				var caseNo = $("#blh").val();
+				$.ajax({
+					url:"getPayInfo",
+					type:"post",
+					data:{ caseNo:caseNo },
+					dataType:"json",
+					error:function () {
+						alert("获取缴费信息错误");
+					},
+					success:function (data) {
+						if (data != null){
+							$(".huajiaList").html("");
+							$.each(data,function (i,item) {
+								var tr = "<tr>";
+								tr += "<td><input type='checkbox' name='item' value='"+item.id+"' /></td>";
+								tr += "<td>"+item.id+"</td>";
+								tr += "<td>"+item.caseNo+"</td>";
+								tr += "<td>"+item.payMoney+"</td>";
+								if (item.payState == 1){
+									tr += "<td>已收费</td>";
+								}else {
+									tr += "<td>未收费</td>";
+								}
+								tr += "<td>"+item.payDate+"</td>";
+								$(".huajiaList").append(tr);
+							});
+							$("#myModal2").modal("show");
+						}
+					}
+				});
+			});
+			//缴费
+			$("#submit_btn2").click(function () {
+				var arr = [];
+				var flag = true;
+				$(".huajiaList tr input[name='item']:checked").each(function () {
+					var id = $(this).val();
+					arr.push(id);
+					flag = false;
+				});
+				if (flag)
+					return false;
+				$.ajax({
+					url:"upPayState",
+					type:"post",
+					data: {
+						arr:arr
+					},
+					traditional:true,
+					error:function () {
+						alert("缴费错误");
+					},
+					success:function (data) {
+						if (data){
+							alert("缴费成功");
+							$("#myModal2").modal("hide");
+						} else {
+							alert("缴费失败");
+						}
+					}
+				});
+			});
+			//获取所有的药品信息
+			$(".add_drug_btn").click(function () {
+				var pid = $("#sfzh").val();
+				var caseNo = $("#blh").val();
+				if (pid == null || pid ==  ''){
+					alert("身份信息不能为空");
+					return;
+				}
+				if (caseNo == null || caseNo == ''){
+					alert("病历号不能为空");
+					return;
+				}
+				$.post("getAllDrugInfo",function (data) {
+					if (data != null){
+						$(".druginfo").html("");
+						$.each(data,function (i,item) {
+							var tr = "<tr>";
+							tr += "<td><input type='checkbox' /></td>";
+							tr += "<td>"+item.dgName+"</td>";
+							tr += "<td>"+item.dgSpec+"</td>";
+							tr += "<td>"+item.dgPrice+"</td>";
+							tr += "<td>"+item.dgInv+"</td>";
+							tr += "<td>"+item.dgUit+"</td>";
+							tr += "<td style='display: none'>"+item.id+"</td>";
+							$(".druginfo").append(tr);
+						});
+						$("#myModal").modal("show");
+					}else{
+						alert("没有药品信息，请及时添加！");
+					}
+				});
+			});
+			//增加药品
+			$("#submit_btn").click(function () {
+				$(".druginfo input[type='checkbox']:checked").each(function () {
+					var dgName = $(this).parent().parent().children().eq(1).text();
+					var dgSpec = $(this).parent().parent().children().eq(2).text();
+					var dgPrice = $(this).parent().parent().children().eq(3).text();
+					var dgInv = $(this).parent().parent().children().eq(4).text();
+					var dgUit = $(this).parent().parent().children().eq(5).text();
+					var dgId = $(this).parent().parent().children().eq(6).text();
+					var ks = $("#kdks option:selected").text();
+
+					var tr = "<tr>";
+					tr += "<td><input type='checkbox' class='dgList' value='"+dgId+"'></td>";
+					tr += "<td>"+dgName+"</td>";
+					tr += "<td>"+dgSpec+"</td>";
+					tr += "<td>"+dgPrice+"</td>";
+					tr += "<td>"+dgInv+"</td>";
+					tr += "<td>"+dgUit+"</td>";
+					tr += "<td><input type='number' min='1' class='fushu' value='1' /></td>";
+					tr += "<td><input type='text' disabled class='jine' value='"+dgPrice+"' /></td>";
+					tr += "<td>"+ks+"</td>";
+
+					$("#myModal").modal("hide");
+					$("#tableList").append(tr);
+				});
+			});
+ 			//计算金额
+			$("#tableList").on("change",".fushu",function () {
+				var num = $(this).val();
+				var price = $(this).parent().parent().children().eq(3).text();
+				$(this).parent().parent().find(".jine").val(num * price);
+				if ($(this).parent().parent().find(".dgList").is(":checked")){
+					$("#zje").text(getAllMoney());
+				}
+			});
+			//获取总金额
+			function getAllMoney(){
+				var allMoney = 0;
+				$("#tableList tr").each(function () {
+					if ($(this).find(".dgList").is(":checked")){
+						allMoney += parseInt($(this).find(".jine").val());
+					}
+				});
+				return allMoney;
+			}
+			//选中改变金额
+			$("#tableList").on("change",".dgList",function () {
+				$("#zje").text(getAllMoney());
+			});
+			//获取所有的科室
+			var keshi = [];
+			$.post("getDep",{},function (data) {
+				keshi = data;
+				$("#kdks").append("<option></option>");
+				$.each(data,function (index,item) {
+					$("#kdks").append("<option value='" + item.id + "'>"+ item.dname +"</option>");
+				});
+			});
+			//身份证读卡
+			$("#idCard_btn").click(function () {
+				var idCard = $("#typenumber").val();
+				$.post("getRegisterByIdCard",{idCard:idCard},function (data) {
+					$("#xm").val(data.rname);
+					$("#xb").val(data.sex);
+					$("#nl").val(data.age);
+					$("#csrq").val(data.birthday);
+					$("#sfzh").val(data.idCard);
+				});
+			});
+			//病例号读取信息
+			$("#blh").blur(function () {
+				var caseNo = $(this).val();
+				$.post("getRegisterByCaseNo",{caseNo:caseNo},function (data) {
+					if (data.idCard != $("#typenumber").val()){
+						alert("病历号与身份证号不匹配！");
+						return false;
+					}
+					$("#jslb").val(data.settleType);
+					$("#ylzh").val(data.mcardNo);
+					$("#yllb").val(data.medicalType);
+					$("#kdks").val(data.deptNo);
+					$.post("getDoctorById",{drId:data.drId},function (name) {
+						$("#kdys").val(name);
+					});
+				});
+			});
+			$(".pagination li").click(function(){
+				$(this).siblings().removeClass("active");
+				$(this).addClass("active");
+			});
+		</script>
+	</body>
+</html>

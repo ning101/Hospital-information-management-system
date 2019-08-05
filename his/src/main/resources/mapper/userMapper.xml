@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.his.dao.userDao">
+
+    <select id="findDoctor" parameterType="string" resultType="doctor">
+        select id,code,username as userName,pwd,dep from t_his_doctor_info where username = #{userName}
+    </select>
+
+    <insert id="register" parameterType="doctor" useGeneratedKeys="true" keyProperty="id">
+        insert into t_his_doctor_info(code,username,pwd,dep) values(#{code},#{userName},#{pwd},#{dep})
+    </insert>
+
+</mapper>

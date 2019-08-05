@@ -1,0 +1,208 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+.clear{
+	clear: both;
+}
+.part1{
+	/* background: #CED4DA; */
+	height:  30px;
+	background-color: #E9ECEF;
+}
+.part1 ul{
+	padding: 0px;
+	margin: 0px;
+	line-height: 20px;
+}
+
+.part1 ul li{
+	float: left;
+	padding: 5px 12px;
+	list-style: none;
+	font-size: 12px;
+}
+.part1 ul li a{
+	margin-left: 20px;
+	text-decoration: none;
+	color: black;
+}
+
+.part2{
+	color: #0069D9;
+	font-size: 14px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 20px;
+}
+#updatenumber{
+	cursor: pointer;
+	line-height: 20px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+/* part3 */
+.part3{
+	font-size: 14px;
+	background-color: #CED4DA;
+	height: 27px;
+}
+.makeappointment{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	
+	background-image: url(../img/makeappointment.png);
+}
+#invoiceinfotitle{
+	float: left;
+	color: green;
+}
+#invoiceoption{
+	float: right;
+	margin-right: 40px;
+}
+#invoiceoption ul{
+	margin: 0px;
+	padding: 0px;
+}
+#invoiceoption ul li{
+	list-style: none;
+	float: left;
+	padding: 5px 10px;
+}
+#invoiceoption ul li a{
+	text-decoration: none;
+	color: black;
+}
+.part4{
+	background-color: #ABDDE5;
+	line-height: 24px;
+	padding-left: 20px;
+}
+.typenumbeoption{
+	float: left;
+	height: 22px;
+	margin-left: 5px;
+}
+#typenumber{
+	float: left;
+	line-height: 20px;
+	margin-left: 20px;
+}
+.cardlist{
+	float: left;
+}
+.cardlist ul{
+	margin: 0px;
+	padding: 0px;
+}
+.cardlist ul li{
+	list-style: none;
+	float: left;
+	font-size: 14px;
+	padding: 5px 10px;
+	line-height: 14px;
+}
+.part5{
+	font-size: 14px;
+	padding-left: 20px;
+}
+.part5 ul{
+	float: none;
+	width:1400px;
+}
+.part5 ul li{
+		list-style: none;
+		width: 260px;
+		height: 24px;
+		float: left;
+		display: block;
+		margin-top: 10px;
+}
+.pre{
+	display: inline-block;
+	line-height: 14px;
+	width: 70px;
+	margin-right: 10px;
+}
+.next{
+	display: inline-block;
+	line-height: 14px;
+	width: 150px;
+	border-bottom: 1px solid #333;
+}
+.fapiao div{
+	height:30px;
+	margin-top:4px;
+	text-align: center;
+}
+.shoufei table{
+	border-top: none;
+	border-left: none;
+	text-align: center;
+}
+.shoufei table td{
+	height: 30px;
+	line-height: 30px;
+}
+
+.part6{
+	font-size: 14px;
+}
+.list-info{
+	overflow: scroll;
+	height:320px;
+	margin-top: 20px;
+}
+#infolist{
+	float: left;
+}
+#refresh{
+	float: right;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+#sfzdk{
+	cursor: pointer;
+}
+.tablebox{
+	border: 0.1px;
+	border-style: solid;
+	border-color: lightgray;
+	line-height: 24px;
+	text-align: center;
+}
+.title{
+	height: 28px;
+	line-height: 28px;
+	background: #5BC0DE;
+}
+
+.tablebox tr th, .tablebox tr td{
+	border-left: 0.05px solid lightgray;
+	border-top: 0.05px solid lightgray;
+	padding: 3px 10px;
+	font-size: 12px;
+	min-width: 80px;
+}
+.tablebox tr:nth-child(2n+1){
+	background-color: lightcyan;
+}
+.tablebox tr.theader{
+	color: green;
+	font-weight: normal;
+	background-color: white;
+}
+.part7{
+	width: 60%;
+	margin: auto;
+}

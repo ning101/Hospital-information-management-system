@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+
+    <script src="bootstrap-3.3.7-dist/js/jquery-3.3.1.min.js"></script>
+    <script>
+        var obj = {
+          aa:"aa",
+            bb:"bb"
+        };
+        $.ajax({
+            url:"testJson",
+            type:"post",
+            data:obj,
+            error:function () {
+                alert("请求错误");
+            },
+            success:function (data) {
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>
