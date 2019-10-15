@@ -74,7 +74,7 @@ INSERT INTO t_his_doctor_info VALUES ('1', '001', '张三', 'zhangsan', '1');
 INSERT INTO t_his_doctor_info VALUES ('2', '002', '李四', 'lisi', '1');
 INSERT INTO t_his_doctor_info VALUES ('3', '003', '王五', 'wangwu', '3');
 INSERT INTO t_his_doctor_info VALUES ('4', '004', '赵六', 'zhaoliu', '5');
-INSERT INTO t_his_doctor_info VALUES ('6', '15084435633', '唐宁', 'tangning', '2');
+INSERT INTO t_his_doctor_info VALUES ('6', '45265', '唐宁', 'tangning', '2');
 INSERT INTO t_his_doctor_info VALUES ('7', 'jie', '杨杰', 'yangjie', '4');
 INSERT INTO t_his_doctor_info VALUES ('8', '123', '文进', 'wenjin', '6');
 
